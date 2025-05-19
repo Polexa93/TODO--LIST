@@ -1,38 +1,218 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
+  background: none;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* Background image wrapper */
+.app-background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+  background-image: url('../public/todo-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: flex-start; 
+
+  z-index: -1; 
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+/* The main app container */
+.app {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  min-width: 320px;
+  max-width: 480px;
+  width: 90vw;
+  box-sizing: border-box;
+}
+
+/* Heading */
+.app h1 {
+  margin-top: 0;
+  text-align: center;
+  color: #333;
+}
+
+/* Input container */
+.input-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.add-task-button {
+  background-color: #007bff;
   color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.add-task-button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-container input {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  border-right: none; /* remove right border */
+}
+
+.input-container input:focus {
+  border-color: #aaaaaa;
+  outline: none;
+}
+
+.input-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease, font-weight 0.3s ease;
+}
+
+.input-container button:hover {
+  background-color: #0056b3;
+  font-weight: bold;
+}
+
+/* Task list - scrollable container */
+.task-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 450px; /* approx height for 7 tasks */
+  overflow-y: auto;
+  padding-right: 8px; /* space for scrollbar */
+  scrollbar-width: thin; /* Firefox */
+}
+
+/* WebKit scrollbar styles */
+.task-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.task-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.task-list::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Individual task card */
+.task-card {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.task-card:hover {
+  background-color: #e0e0e0;
+}
+
+/* Task text */
+.task-card span {
+  flex-grow: 1;
+  user-select: none;
+}
+
+/* Editable input inside task */
+.task-card input[type="text"] {
+  flex-grow: 1;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Buttons inside task */
+.task-card button {
+  margin-left: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, font-weight 0.3s ease;
+}
+
+.task-card button:hover {
+  font-weight: bold;
+}
+
+.edit-task-button {
+  background-color: #28a745; 
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-left: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.edit-task-button:hover {
+  background-color: #1e7e34;
+  font-weight: bold;
+}
+
+.delete-task-button {
+  background-color: #dc3545; 
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-left: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.delete-task-button:hover {
+  background-color: #bd2130;
+  font-weight: bold;
+}
+
+input::placeholder {
+  font-style: italic;
+  color: #cccccc;
 }
