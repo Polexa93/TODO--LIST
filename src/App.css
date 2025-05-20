@@ -75,7 +75,7 @@ body {
   border-radius: 6px 0 0 6px;
   outline: none;
   transition: border-color 0.3s ease;
-  border-right: none; /* remove right border */
+  border-right: none;
 }
 
 .input-container input:focus {
@@ -104,10 +104,10 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  max-height: 450px; /* approx height for 7 tasks */
+  max-height: 450px; 
   overflow-y: auto;
-  padding-right: 8px; /* space for scrollbar */
-  scrollbar-width: thin; /* Firefox */
+  padding-right: 8px; 
+  scrollbar-width: thin; 
 }
 
 /* WebKit scrollbar styles */
